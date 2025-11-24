@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Job Applications - Caregiver Platform{% endblock %}
+
+{% block content %}
+<h2>Job Applications</h2>
+<div class="actions">
+    <a href="{{ url_for('create_job_application') }}" class="btn btn-primary">Create New Job Application</a>
+</div>
+
+{% if applications %}
+<table>
+    <thead>
+        <tr>
+            <th>Job ID</th>
+            <th>Caregiving Type</th>
+            <th>Member Name</th>
+            <th>Caregiver Name</th>
+            <th>Date Applied</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for app in applications %}
+        <tr>
+            <td>{{ app.job_id }}</td>
+            <td>{{ app.required_caregiving_type }}</td>
+            <td>{{ app.member_name }}</td>
+            <td>{{ app.caregiver_name }}</td>
+            <td>{{ app.date_applied }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('delete_job_application', caregiver_id=app.caregiver_user_id, job_id=app.job_id) }}" style="display: inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this application?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No job applications found.</p>
+{% endif %}
+{% endblock %}
+

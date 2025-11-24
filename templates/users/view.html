@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}View User - Caregiver Platform{% endblock %}
+
+{% block content %}
+<h2>User Details</h2>
+<table>
+    <tr>
+        <th>User ID</th>
+        <td>{{ user.user_id }}</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>{{ user.email }}</td>
+    </tr>
+    <tr>
+        <th>Given Name</th>
+        <td>{{ user.given_name }}</td>
+    </tr>
+    <tr>
+        <th>Surname</th>
+        <td>{{ user.surname }}</td>
+    </tr>
+    <tr>
+        <th>City</th>
+        <td>{{ user.city }}</td>
+    </tr>
+    <tr>
+        <th>Phone Number</th>
+        <td>{{ user.phone_number }}</td>
+    </tr>
+    <tr>
+        <th>Profile Description</th>
+        <td>{{ user.profile_description or 'N/A' }}</td>
+    </tr>
+</table>
+<div class="actions">
+    <a href="{{ url_for('edit_user', user_id=user.user_id) }}" class="btn btn-primary">Edit</a>
+    <a href="{{ url_for('list_users') }}" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}
+

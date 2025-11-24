@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Create Caregiver - Caregiver Platform{% endblock %}
+
+{% block content %}
+<h2>Create New Caregiver</h2>
+<p><strong>Note:</strong> The user must exist in the USER table first.</p>
+<form method="POST">
+    <div class="form-group">
+        <label for="caregiver_user_id">User ID *</label>
+        <select id="caregiver_user_id" name="caregiver_user_id" required>
+            <option value="">Select a user...</option>
+            {% for user in available_users %}
+            <option value="{{ user.user_id }}">{{ user.user_id }} - {{ user.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="photo">Photo URL</label>
+        <input type="text" id="photo" name="photo">
+    </div>
+    <div class="form-group">
+        <label for="gender">Gender *</label>
+        <select id="gender" name="gender" required>
+            <option value="">Select gender...</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="caregiving_type">Caregiving Type *</label>
+        <select id="caregiving_type" name="caregiving_type" required>
+            <option value="">Select type...</option>
+            <option value="babysitter">Babysitter</option>
+            <option value="elderly care">Elderly Care</option>
+            <option value="playmate for children">Playmate for Children</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="hourly_rate">Hourly Rate *</label>
+        <input type="number" id="hourly_rate" name="hourly_rate" step="0.01" min="0" required>
+    </div>
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Create Caregiver</button>
+        <a href="{{ url_for('list_caregivers') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{% endblock %}
+

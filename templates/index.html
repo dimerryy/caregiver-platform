@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Caregiver Platform{% endblock %}
+
+{% block content %}
+<h2>Welcome to Caregiver Platform Database Management</h2>
+<p>This application provides CRUD (Create, Read, Update, Delete) operations for all tables in the database.</p>
+
+<h3>Available Tables:</h3>
+<ul style="list-style: none; padding: 0;">
+    <li style="margin: 10px 0;">
+        <a href="{{ url_for('list_users') }}" class="btn btn-primary">Users</a>
+        <span style="margin-left: 10px;">Base table for all users (caregivers and members)</span>
+    </li>
+    <li style="margin: 10px 0;">
+        <a href="{{ url_for('list_caregivers') }}" class="btn btn-primary">Caregivers</a>
+        <span style="margin-left: 10px;">Caregiver-specific information</span>
+    </li>
+    <li style="margin: 10px 0;">
+        <a href="{{ url_for('list_members') }}" class="btn btn-primary">Members</a>
+        <span style="margin-left: 10px;">Family member-specific information</span>
+    </li>
+    <li style="margin: 10px 0;">
+        <a href="{{ url_for('list_addresses') }}" class="btn btn-primary">Addresses</a>
+        <span style="margin-left: 10px;">Address information for members</span>
+    </li>
+    <li style="margin: 10px 0;">
+        <a href="{{ url_for('list_jobs') }}" class="btn btn-primary">Jobs</a>
+        <span style="margin-left: 10px;">Job postings by members</span>
+    </li>
+    <li style="margin: 10px 0;">
+        <a href="{{ url_for('list_job_applications') }}" class="btn btn-primary">Job Applications</a>
+        <span style="margin-left: 10px;">Applications by caregivers to jobs</span>
+    </li>
+    <li style="margin: 10px 0;">
+        <a href="{{ url_for('list_appointments') }}" class="btn btn-primary">Appointments</a>
+        <span style="margin-left: 10px;">Appointments between members and caregivers</span>
+    </li>
+</ul>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Address - Caregiver Platform{% endblock %}
+
+{% block content %}
+<h2>Edit Address</h2>
+<form method="POST">
+    <div class="form-group">
+        <label>Member ID</label>
+        <input type="text" value="{{ address.member_user_id }}" disabled>
+        <small>Member ID cannot be changed</small>
+    </div>
+    <div class="form-group">
+        <label>Member Name</label>
+        <input type="text" value="{{ address.given_name }} {{ address.surname }}" disabled>
+    </div>
+    <div class="form-group">
+        <label for="house_number">House Number *</label>
+        <input type="text" id="house_number" name="house_number" value="{{ address.house_number }}" required>
+    </div>
+    <div class="form-group">
+        <label for="street">Street *</label>
+        <input type="text" id="street" name="street" value="{{ address.street }}" required>
+    </div>
+    <div class="form-group">
+        <label for="town">Town *</label>
+        <input type="text" id="town" name="town" value="{{ address.town }}" required>
+    </div>
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Update Address</button>
+        <a href="{{ url_for('list_addresses') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{% endblock %}
+

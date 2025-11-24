@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Caregiver - Caregiver Platform{% endblock %}
+
+{% block content %}
+<h2>Edit Caregiver</h2>
+<form method="POST">
+    <div class="form-group">
+        <label>User ID</label>
+        <input type="text" value="{{ caregiver.caregiver_user_id }}" disabled>
+        <small>User ID cannot be changed</small>
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" value="{{ caregiver.given_name }} {{ caregiver.surname }}" disabled>
+    </div>
+    <div class="form-group">
+        <label for="photo">Photo URL</label>
+        <input type="text" id="photo" name="photo" value="{{ caregiver.photo or '' }}">
+    </div>
+    <div class="form-group">
+        <label for="gender">Gender *</label>
+        <select id="gender" name="gender" required>
+            <option value="Male" {% if caregiver.gender == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if caregiver.gender == 'Female' %}selected{% endif %}>Female</option>
+            <option value="Other" {% if caregiver.gender == 'Other' %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="caregiving_type">Caregiving Type *</label>
+        <select id="caregiving_type" name="caregiving_type" required>
+            <option value="babysitter" {% if caregiver.caregiving_type == 'babysitter' %}selected{% endif %}>Babysitter</option>
+            <option value="elderly care" {% if caregiver.caregiving_type == 'elderly care' %}selected{% endif %}>Elderly Care</option>
+            <option value="playmate for children" {% if caregiver.caregiving_type == 'playmate for children' %}selected{% endif %}>Playmate for Children</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="hourly_rate">Hourly Rate *</label>
+        <input type="number" id="hourly_rate" name="hourly_rate" step="0.01" min="0" value="{{ caregiver.hourly_rate }}" required>
+    </div>
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Update Caregiver</button>
+        <a href="{{ url_for('list_caregivers') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{% endblock %}
+
