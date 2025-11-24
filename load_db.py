@@ -14,13 +14,14 @@ else:
     # For Supabase: user='postgres', host='db.xxxxx.supabase.co', db='postgres'
     # For Neon: check your Neon dashboard for credentials
     # For Render: check your Render dashboard for credentials
-    DB_USER = 'postgres'
-    DB_PASSWORD = 'your_password'
-    DB_HOST = 'db.xxxxx.supabase.co'  # Update with your host
-    DB_PORT = '5432'
-    DB_NAME = 'postgres'  # Usually 'postgres' for Supabase, 'neondb' for Neon
+    DB_USER = os.getenv('DB_USER', 'dimerryy')
+    DB_PASSWORD = os.getenv('DB_PASSWORD', '')
+    DB_HOST = os.getenv('DB_HOST', 'localhost')
+    DB_PORT = os.getenv('DB_PORT', '5432')
+    DB_NAME = os.getenv('DB_NAME', 'caregiver_platform')
     
-    DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    # Render requires SSL, so add sslmode=require
+    DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"
 
 print("Connecting to database...")
 engine = create_engine(DATABASE_URL)

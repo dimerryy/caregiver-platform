@@ -31,7 +31,12 @@ DB_NAME = os.getenv('DB_NAME', 'caregiver_platform')
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # Create engine and session
-engine = create_engine(DATABASE_URL, echo=False)
+# Render requires SSL, so add connect_args for SSL if using Render
+connect_args = {}
+if 'render.com' in DB_HOST.lower() or os.getenv('RENDER'):
+    connect_args = {'sslmode': 'require'}
+
+engine = create_engine(DATABASE_URL, echo=False, connect_args=connect_args)
 Session = sessionmaker(bind=engine)
 session = Session()
 
